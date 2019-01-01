@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-
+@EqualsAndHashCode(of= {"id","destiny","vehicle","seats"})
 public class Transport {
 	@Id
 	@Column(name="ID")

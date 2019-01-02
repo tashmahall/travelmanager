@@ -25,8 +25,8 @@ public class Passenger {
 
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASS_SEQ")
-	@SequenceGenerator(sequenceName = "passengers_seq", allocationSize = 1, name = "PASS_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASSENGERS_SQ")
+	@SequenceGenerator(sequenceName = "passengers_seq", allocationSize = 1, name = "PASSENGERS_SQ")
 	private Long id;
 	@Column(name="NAME")
 	private String name;

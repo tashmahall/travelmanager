@@ -1,8 +1,8 @@
 package com.transport.travelmanager.exceptions;
 
-public class TransportException extends Exception {
+public class TravelManagerException extends Exception {
 
-	public TransportException(String message) {
+	public TravelManagerException(String message) {
 		super(message);
 	}
 

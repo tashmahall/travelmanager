@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.transport.travelmanager.domain.Destiny;
 import com.transport.travelmanager.domain.Transport;
 import com.transport.travelmanager.domain.Vehicle;
-import com.transport.travelmanager.exceptions.TransportException;
+import com.transport.travelmanager.exceptions.TravelManagerException;
 import com.transport.travelmanager.repository.DestinyRepository;
 import com.transport.travelmanager.repository.TransportRepository;
 import com.transport.travelmanager.repository.VehicleRepository;
@@ -24,20 +24,20 @@ public class TransportService {
 	@Autowired
 	private DestinyRepository destinyRepository;
 	
-	public Transport createNewTransport(Destiny destinyId,Vehicle vehicleId, Date dateTimeTravelStart) throws TransportException {
+	public Transport createNewTransport(Destiny destinyId,Vehicle vehicleId, Date dateTimeTravelStart) throws TravelManagerException {
 		if( destinyId == null ||  vehicleId == null || dateTimeTravelStart==null) {
-			throw new TransportException("The destiny, vehicle and date time to travel Start must be informed");
+			throw new TravelManagerException("The destiny, vehicle and date time to travel Start must be informed");
 		}
 		if( destinyId.getId()==null||vehicleId.getId()==null) {
-			throw new TransportException("The destiny or vehicle have not been indentified by the system, yet");
+			throw new TravelManagerException("The destiny or vehicle have not been indentified by the system, yet");
 		}
 		Optional<Destiny> oDestiny = destinyRepository.findById(destinyId.getId());
 		Optional<Vehicle> oVehicle = vehicleRepository.findById(vehicleId.getId());
-		Destiny dTemp = oDestiny.get();
-		Vehicle vTemp = oVehicle.get();
-		if( dTemp==null||vTemp==null) {
-			throw new TransportException("The destiny or vehicle have not been indentified by the system, yet");
+		if( oDestiny==null||oVehicle==null||!oDestiny.isPresent()||!oVehicle.isPresent()) {
+			throw new TravelManagerException("The destiny or vehicle have not been indentified by the system, yet");
 		}
+		Vehicle vTemp = oVehicle.get();
+
 		return transportRepository.createNewTransport(destinyId.getId(), vehicleId.getId(), vTemp.getCapacity(), dateTimeTravelStart);
 	}
 }

@@ -128,5 +128,8 @@ public class JackJsonUtils {
 			return objectMapper.readValue(jsonNode.toString(), objectMapper.getTypeFactory().constructCollectionLikeType(List.class,type));
 		}
 	}
+	public static <T> T jsonStringToObject(String jsonString, Class<T> classType) throws IOException{
+		return	objectMapper.readValue(jsonString, classType);
+	}
 	
 }

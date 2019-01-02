@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="PASSENGERS")
+@Table(name="VEHICLE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,8 +24,8 @@ import lombok.Setter;
 public class Vehicle {
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VEHIC_SEQ")
-	@SequenceGenerator(sequenceName = "vehicle_seq", allocationSize = 1, name = "VEHIC_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VECHICLE_SQ")
+	@SequenceGenerator(sequenceName = "vehicle_seq", allocationSize = 1, name = "VECHICLE_SQ")
 	private Long id;
 	@Column(name="NAME", unique=true)
 	private String name;

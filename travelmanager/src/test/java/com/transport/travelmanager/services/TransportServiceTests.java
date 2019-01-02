@@ -2,26 +2,24 @@ package com.transport.travelmanager.services;
 
 import static com.transport.travelmanager.utils.CreatEntityRandomDataHelper.getNewTransport;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-import java.sql.Date;
 import java.util.Optional;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.transport.travelmanager.domain.Destiny;
 import com.transport.travelmanager.domain.Transport;
 import com.transport.travelmanager.domain.Vehicle;
-import com.transport.travelmanager.exceptions.TransportException;
+import com.transport.travelmanager.exceptions.TravelManagerException;
 import com.transport.travelmanager.repository.DestinyRepository;
 import com.transport.travelmanager.repository.TransportRepository;
 import com.transport.travelmanager.repository.VehicleRepository;
@@ -39,8 +37,11 @@ public class TransportServiceTests {
 	@Mock
 	private JdbcTemplate JdbcTemplate;
 	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
 	@Test
-	public void createNewTransport() throws TransportException {
+	public void testCreateNewTransport() throws TravelManagerException {
 		Transport transport = getNewTransport();
 		Optional<Destiny> oDestiny = Optional.of(transport.getDestiny());
 		Optional<Vehicle> oVehicle = Optional.of(transport.getVehicle());
@@ -53,6 +54,31 @@ public class TransportServiceTests {
 		
 		assertEquals("The Transport received was different than the expected",transport,tTemp);
 	}
-
+	
+	@Test 
+	public void testCreateNewTransportDestinyNull() throws TravelManagerException {
+		Transport transport = getNewTransport();
+	
+	    thrown.expect(TravelManagerException.class);
+	    thrown.expectMessage("The destiny, vehicle and date time to travel Start must be informed");
+		transportService.createNewTransport(null, transport.getVehicle(), transport.getDateTimeTravelStart());	
+	}
+	@Test 
+	public void testCreateNewTransportVehicleNull() throws TravelManagerException {
+		Transport transport = getNewTransport();
+	
+	    thrown.expect(TravelManagerException.class);
+	    thrown.expectMessage("The destiny, vehicle and date time to travel Start must be informed");
+		transportService.createNewTransport(transport.getDestiny(), null, transport.getDateTimeTravelStart());	
+	}
+	@Test 
+	public void testCreateNewTransportDateTravelStartNull() throws TravelManagerException {
+		Transport transport = getNewTransport();
+	
+	    thrown.expect(TravelManagerException.class);
+	    thrown.expectMessage("The destiny, vehicle and date time to travel Start must be informed");
+		transportService.createNewTransport(transport.getDestiny(), transport.getVehicle(), null);	
+	}
 
 }
+

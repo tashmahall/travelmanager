@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.transport.travelmanager.domain.Destiny;
+import com.transport.travelmanager.domain.dtos.DestinyDTO;
 import com.transport.travelmanager.repository.DestinyRepository;
 import com.transport.travelmanager.utils.JackJsonUtils;
 
@@ -22,19 +23,29 @@ public class DestinyController {
 	
 	@PostMapping(path="/adddestiny",consumes= {MediaType.APPLICATION_JSON_VALUE},produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<JsonNode> addDestiny(@RequestBody JsonNode request) throws JsonProcessingException {
+		ObjectNode response = JackJsonUtils.createNewNode();
+		if(!request.has("name")||request.get("name").asText().isEmpty()){
+			response.put("message","Wrong attributes sent");
+			response.set("Destiny Attributes",JackJsonUtils.convertValue(new DestinyDTO("")));
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+		}
 		Destiny destiny = new Destiny();
 		destiny.setName(request.get("name").textValue());
 		destiny = destinyRepository.save(destiny);
-		ObjectNode response = JackJsonUtils.createNewNode();
 		response.put("message", "Destiny created with success");
 		response.set("Destiny",JackJsonUtils.convertValue(destiny));
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	@PostMapping(path="/getdestiny",consumes= {MediaType.APPLICATION_JSON_VALUE},produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<JsonNode>getDestinyByName(@RequestBody JsonNode request){
+		ObjectNode response = JackJsonUtils.createNewNode();
+		if(!request.has("name")||request.get("name").asText().isEmpty()){
+			response.put("message","Wrong attributes sent to consult");
+			response.set("Destiny Attributes",JackJsonUtils.convertValue(new DestinyDTO("")));
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+		}
 		String name = request.get("name").textValue();
 		Destiny destiny = destinyRepository.findByName(name);
-		ObjectNode response = JackJsonUtils.createNewNode();
 		response.set("Destiny",JackJsonUtils.convertValue(destiny));
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

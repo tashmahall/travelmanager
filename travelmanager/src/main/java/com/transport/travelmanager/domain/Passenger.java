@@ -9,8 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of= {"transport","person","seat"})
 public class Passenger {
 
 	@Id
@@ -28,14 +31,20 @@ public class Passenger {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASSENGERS_SQ")
 	@SequenceGenerator(sequenceName = "passengers_seq", allocationSize = 1, name = "PASSENGERS_SQ")
 	private Long id;
-	@Column(name="NAME")
-	private String name;
 	@ManyToOne
 	@JoinColumn(name="TRANSPORT_ID", referencedColumnName="ID")
 	private Transport transport;
-	public Passenger(long id, String name) {
+	@ManyToOne
+	@JoinColumn(name="PERSON_ID", referencedColumnName="ID")
+	private Person person;
+	
+	@Transient
+	private Seat seat;
+	
+	public Passenger(long id, Transport transport, Person person) {
 		this.id= id;
-		this.name=name;
+		this.person=person;
+		this.transport=transport;
 	}
 
 }

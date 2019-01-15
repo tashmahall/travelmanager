@@ -3,6 +3,7 @@ package com.transport.travelmanager.utils;
 import java.util.Date;
 
 import com.transport.travelmanager.domain.Destiny;
+import com.transport.travelmanager.domain.Person;
 import com.transport.travelmanager.domain.Transport;
 import com.transport.travelmanager.domain.Vehicle;
 
@@ -20,6 +21,10 @@ public class CreatEntityRandomDataHelper {
 	public static Vehicle getRandomVehicle() {
 		Vehicle vehicle = new Vehicle(1L,"Car",5);
 		return vehicle;
+	}
+	public static Person getRandomPerson() {
+		Person person = new Person(1L, "Fulano", "95474978049");
+		return person;
 	}
 
 }

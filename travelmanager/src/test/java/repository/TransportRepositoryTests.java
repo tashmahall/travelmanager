@@ -14,8 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.transport.travelmanager.domain.Transport;
-import com.transport.travelmanager.repository.TransportRepository;
-import com.transport.travelmanager.repository.rowmappers.TransportRowMapper;;
+import com.transport.travelmanager.repositories.TransportRepository;
+import com.transport.travelmanager.repositories.rowmappers.TransportRowMapper;;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TransportRepositoryTests {
@@ -41,7 +41,7 @@ public class TransportRepositoryTests {
 		when(jdbcTemplate.update(anyString(), any(new Object[] {}.getClass()),any(new int[] {}.getClass()))).thenReturn(1);
 		when(jdbcTemplate.queryForObject(anyString(), any(TransportRowMapper.class))).thenReturn(transport);
 		
-		Transport tTest = transportRepository.createNewTransport(transport.getDestiny().getId(),transport.getVehicle().getId(),transport.getSeats(),transport.getDateTimeTravelStart());
+		Transport tTest = transportRepository.createNewTransport(transport.getDestiny().getId(),transport.getVehicle().getId(),transport.getVehicle().getCapacity(),transport.getDateTimeTravelStart(),new String());
 		
 		assertEquals("The Transport received was different than the expected",transport,tTest);
 	}

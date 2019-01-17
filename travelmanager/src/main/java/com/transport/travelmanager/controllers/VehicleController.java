@@ -1,4 +1,4 @@
-package com.transport.travelmanager.controler;
+package com.transport.travelmanager.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.transport.travelmanager.domain.Vehicle;
 import com.transport.travelmanager.domain.dtos.VehicleDTO;
-import com.transport.travelmanager.repository.VehicleRepository;
+import com.transport.travelmanager.repositories.VehicleRepository;
 import com.transport.travelmanager.utils.JackJsonUtils;
 
 @RestController

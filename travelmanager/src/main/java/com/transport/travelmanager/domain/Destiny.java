@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of= {"id","name"})
+@EqualsAndHashCode(of= {"name"})
 public class Destiny {
 	@Id
 	@Column(name="ID")

@@ -21,6 +21,19 @@
 
 	<dependencies>
 
+        <!-- Adding RESTEasy support to Bean Validations -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-validator-provider-11</artifactId>
+            <version>3.6.2.Final</version>
+        </dependency>
+
+		<dependency>
+		   <groupId>org.apache.commons</groupId>
+		   <artifactId>commons-text</artifactId>
+		   <version>1.6</version>
+		</dependency>	
+
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 		<dependency>
 		    <groupId>com.h2database</groupId>

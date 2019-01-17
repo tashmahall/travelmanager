@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(of= {"id","destiny","vehicle","seats"})
+@EqualsAndHashCode(of= {"id","destiny","vehicle"})
 public class Transport {
 	@Id
 	@Column(name="ID")
@@ -39,24 +40,24 @@ public class Transport {
 	@ManyToOne()
 	@JoinColumn(name="DESTINY_ID", referencedColumnName="ID")
 	private Destiny destiny;
-	@JsonProperty(access=Access.WRITE_ONLY)
-	@OneToMany(mappedBy="transport")
-	private List<Passenger> passengersList;
 	@ManyToOne
 	@JoinColumn(name="VEHICLE_ID", referencedColumnName="ID")
 	private Vehicle vehicle;	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="DATE_TIME_TRAVEL_START")
 	private Date dateTimeTravelStart;
-	@Column(name="SEATS")
-	private Integer seats;
-	public Transport(Long id, Destiny destiny, Vehicle vehicle, Date dateTimeTravelStart, Integer seats) {
+	@JsonProperty(access=Access.WRITE_ONLY)
+	@OneToMany(mappedBy="transport",fetch=FetchType.LAZY)
+	private List<Seat> listSeats;
+	@Column(name="CODE")
+	private String transportCode;
+	public Transport(Long id, Destiny destiny, Vehicle vehicle, Date dateTimeTravelStart, String transportCode) {
 		super();
 		this.id = id;
 		this.destiny = destiny;
 		this.vehicle = vehicle;
 		this.dateTimeTravelStart = dateTimeTravelStart;
-		this.seats = seats;
+		this.transportCode = transportCode;
 	}
 	
 }

@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of= {"id","name","capacity"})
+@EqualsAndHashCode(of= {"name"})
 public class Vehicle {
 	@Id
 	@Column(name="ID")

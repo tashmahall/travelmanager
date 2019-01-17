@@ -1,4 +1,4 @@
-package com.transport.travelmanager.repository;
+package com.transport.travelmanager.repositories;
 
 import java.util.List;
 

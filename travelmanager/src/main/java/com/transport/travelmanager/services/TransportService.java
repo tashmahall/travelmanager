@@ -10,9 +10,9 @@ import com.transport.travelmanager.domain.Destiny;
 import com.transport.travelmanager.domain.Transport;
 import com.transport.travelmanager.domain.Vehicle;
 import com.transport.travelmanager.exceptions.TravelManagerException;
-import com.transport.travelmanager.repository.DestinyRepository;
-import com.transport.travelmanager.repository.TransportRepository;
-import com.transport.travelmanager.repository.VehicleRepository;
+import com.transport.travelmanager.repositories.DestinyRepository;
+import com.transport.travelmanager.repositories.TransportRepository;
+import com.transport.travelmanager.repositories.VehicleRepository;
 
 @Service
 public class TransportService {
@@ -24,7 +24,7 @@ public class TransportService {
 	@Autowired
 	private DestinyRepository destinyRepository;
 	
-	public Transport createNewTransport(Destiny destinyId,Vehicle vehicleId, Date dateTimeTravelStart) throws TravelManagerException {
+	public Transport createNewTransport(Destiny destinyId,Vehicle vehicleId, Date dateTimeTravelStart, String transportCode) throws TravelManagerException {
 		if( destinyId == null ||  vehicleId == null || dateTimeTravelStart==null) {
 			throw new TravelManagerException("The destiny, vehicle and date time to travel Start must be informed");
 		}
@@ -37,7 +37,6 @@ public class TransportService {
 			throw new TravelManagerException("The destiny or vehicle have not been indentified by the system, yet");
 		}
 		Vehicle vTemp = oVehicle.get();
-
-		return transportRepository.createNewTransport(destinyId.getId(), vehicleId.getId(), vTemp.getCapacity(), dateTimeTravelStart);
+		return transportRepository.createNewTransport(destinyId.getId(), vehicleId.getId(), vTemp.getCapacity(), dateTimeTravelStart,transportCode);
 	}
 }

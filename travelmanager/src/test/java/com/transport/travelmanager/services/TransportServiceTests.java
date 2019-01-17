@@ -20,9 +20,9 @@ import com.transport.travelmanager.domain.Destiny;
 import com.transport.travelmanager.domain.Transport;
 import com.transport.travelmanager.domain.Vehicle;
 import com.transport.travelmanager.exceptions.TravelManagerException;
-import com.transport.travelmanager.repository.DestinyRepository;
-import com.transport.travelmanager.repository.TransportRepository;
-import com.transport.travelmanager.repository.VehicleRepository;
+import com.transport.travelmanager.repositories.DestinyRepository;
+import com.transport.travelmanager.repositories.TransportRepository;
+import com.transport.travelmanager.repositories.VehicleRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TransportServiceTests {
@@ -48,9 +48,9 @@ public class TransportServiceTests {
 		
 		when(destinyRepository.findById(anyLong())).thenReturn(oDestiny);
 		when(vehicleRepository.findById(anyLong())).thenReturn(oVehicle);
-		when(transportRepository.createNewTransport(transport.getDestiny().getId(), transport.getVehicle().getId(), transport.getVehicle().getCapacity(), transport.getDateTimeTravelStart())).thenReturn(transport);
+		when(transportRepository.createNewTransport(transport.getDestiny().getId(), transport.getVehicle().getId(),transport.getVehicle().getCapacity(), transport.getDateTimeTravelStart(),transport.getTransportCode())).thenReturn(transport);
 		
-		Transport tTemp = transportService.createNewTransport(transport.getDestiny(), transport.getVehicle(), transport.getDateTimeTravelStart());
+		Transport tTemp = transportService.createNewTransport(transport.getDestiny(), transport.getVehicle(), transport.getDateTimeTravelStart(),transport.getTransportCode());
 		
 		assertEquals("The Transport received was different than the expected",transport,tTemp);
 	}
@@ -61,7 +61,7 @@ public class TransportServiceTests {
 	
 	    thrown.expect(TravelManagerException.class);
 	    thrown.expectMessage("The destiny, vehicle and date time to travel Start must be informed");
-		transportService.createNewTransport(null, transport.getVehicle(), transport.getDateTimeTravelStart());	
+		transportService.createNewTransport(null, transport.getVehicle(), transport.getDateTimeTravelStart(),transport.getTransportCode());	
 	}
 	@Test 
 	public void testCreateNewTransportVehicleNull() throws TravelManagerException {
@@ -69,7 +69,7 @@ public class TransportServiceTests {
 	
 	    thrown.expect(TravelManagerException.class);
 	    thrown.expectMessage("The destiny, vehicle and date time to travel Start must be informed");
-		transportService.createNewTransport(transport.getDestiny(), null, transport.getDateTimeTravelStart());	
+		transportService.createNewTransport(transport.getDestiny(), null, transport.getDateTimeTravelStart(),transport.getTransportCode());	
 	}
 	@Test 
 	public void testCreateNewTransportDateTravelStartNull() throws TravelManagerException {
@@ -77,7 +77,7 @@ public class TransportServiceTests {
 	
 	    thrown.expect(TravelManagerException.class);
 	    thrown.expectMessage("The destiny, vehicle and date time to travel Start must be informed");
-		transportService.createNewTransport(transport.getDestiny(), transport.getVehicle(), null);	
+		transportService.createNewTransport(transport.getDestiny(), transport.getVehicle(), null,transport.getTransportCode());	
 	}
 
 }

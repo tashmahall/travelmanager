@@ -1,4 +1,4 @@
-package com.transport.travelmanager.repository;
+package com.transport.travelmanager.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 

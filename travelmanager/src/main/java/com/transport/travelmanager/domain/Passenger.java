@@ -1,5 +1,7 @@
 package com.transport.travelmanager.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,9 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -23,7 +25,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of= {"transport","person","seat"})
+@EqualsAndHashCode(of= {"person"})
 public class Passenger {
 
 	@Id
@@ -32,19 +34,14 @@ public class Passenger {
 	@SequenceGenerator(sequenceName = "passengers_seq", allocationSize = 1, name = "PASSENGERS_SQ")
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name="TRANSPORT_ID", referencedColumnName="ID")
-	private Transport transport;
-	@ManyToOne
 	@JoinColumn(name="PERSON_ID", referencedColumnName="ID")
 	private Person person;
+	@OneToMany(mappedBy="passenger")
+	private List<Seat> seats;
 	
-	@Transient
-	private Seat seat;
-	
-	public Passenger(long id, Transport transport, Person person) {
+	public Passenger(long id, Person person) {
 		this.id= id;
 		this.person=person;
-		this.transport=transport;
 	}
 
 }

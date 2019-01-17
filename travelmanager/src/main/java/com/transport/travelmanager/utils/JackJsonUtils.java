@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JackJsonUtils {
@@ -130,6 +131,9 @@ public class JackJsonUtils {
 	}
 	public static <T> T jsonStringToObject(String jsonString, Class<T> classType) throws IOException{
 		return	objectMapper.readValue(jsonString, classType);
+	}
+	public static ArrayNode listObjectToJsonNode(List<?> list ) {
+		return objectMapper.valueToTree(list);
 	}
 	
 }

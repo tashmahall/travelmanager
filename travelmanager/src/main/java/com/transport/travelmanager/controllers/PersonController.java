@@ -29,7 +29,7 @@ public class PersonController {
 		ObjectNode response = JackJsonUtils.createNewNode();
 		if(!request.has("name")||request.get("name").asText().isEmpty()||!request.has("socialId")||request.get("socialId").asText().isEmpty()){
 			response.put("message","Wrong attributes sent");
-			response.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","")));
+			response.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","", "yyyy-MM-dd")));
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
 		}
 		Person person = new Person();

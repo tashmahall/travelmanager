@@ -60,7 +60,7 @@ public class PersonControllerTest {
 		ResponseEntity<JsonNode> response = controller.addPerson(fakeNodeRequest);
 		ObjectNode responseNode = JackJsonUtils.createNewNode();
 		responseNode.put("message","Wrong attributes sent");
-		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","")));
+		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","","yyyy-MM-dd")));
 		assertNotNull(response);
 		assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
 		assertEquals(ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(responseNode).getBody(), response.getBody());
@@ -74,7 +74,7 @@ public class PersonControllerTest {
 		ResponseEntity<JsonNode> response = controller.addPerson(fakeNodeRequest);
 		ObjectNode responseNode = JackJsonUtils.createNewNode();
 		responseNode.put("message","Wrong attributes sent");
-		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","")));
+		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","","yyyy-MM-dd")));
 		assertNotNull(response);
 		assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
 		assertEquals(ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(responseNode).getBody(), response.getBody());
@@ -87,7 +87,7 @@ public class PersonControllerTest {
 		ResponseEntity<JsonNode> response = controller.addPerson(fakeNodeRequest);
 		ObjectNode responseNode = JackJsonUtils.createNewNode();
 		responseNode.put("message","Wrong attributes sent");
-		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","")));
+		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","","yyyy-MM-dd")));
 		assertNotNull(response);
 		assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
 		assertEquals(ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(responseNode).getBody(), response.getBody());
@@ -101,7 +101,7 @@ public class PersonControllerTest {
 		ResponseEntity<JsonNode> response = controller.addPerson(fakeNodeRequest);
 		ObjectNode responseNode = JackJsonUtils.createNewNode();
 		responseNode.put("message","Wrong attributes sent");
-		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","")));
+		responseNode.set("Person Attributes",JackJsonUtils.convertValue(new PersonDTO("","","yyyy-MM-dd")));
 		assertNotNull(response);
 		assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
 		assertEquals(ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(responseNode).getBody(), response.getBody());

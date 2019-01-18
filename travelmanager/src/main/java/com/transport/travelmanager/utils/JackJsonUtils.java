@@ -29,6 +29,9 @@ public class JackJsonUtils {
 	public static <T> T createNode(String value, Class<T> type) throws IOException{
 		return objectMapper.readValue(value, type);
 	}
+	public static String entityToJsonString(Object t) throws JsonProcessingException {
+		return objectMapper.writeValueAsString(t);
+	}
 	public static ObjectNode createNewNode() {
 		return objectMapper.createObjectNode();
 	}

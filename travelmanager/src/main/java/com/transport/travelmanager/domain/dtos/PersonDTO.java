@@ -13,10 +13,12 @@ public class PersonDTO {
 	private String name;
 	private Long id;
 	private String socialId;
-	public PersonDTO(String name,String socialId) {
+	private String birthDate;
+	public PersonDTO(String name,String socialId, String birthDate) {
 		super();
 		this.name = name;
 		this.socialId = socialId;
+		this.birthDate = birthDate;
 	}
 }
 

@@ -20,14 +20,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of= {"name"})
+@EqualsAndHashCode(of= {"vehicleCode"})
 public class Vehicle {
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VECHICLE_SQ")
 	@SequenceGenerator(sequenceName = "vehicle_seq", allocationSize = 1, name = "VECHICLE_SQ")
 	private Long id;
-	@Column(name="NAME", unique=true)
+	@Column(name="CODE", unique=true)
+	private String vehicleCode;
+	@Column(name="NAME", unique=false)
 	private String name;
 	@Column (name="CAPACITY", nullable=false)
 	private Integer capacity;

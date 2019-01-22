@@ -22,7 +22,7 @@ public class CreatEntityRandomDataHelper {
 		return destiny;
 	}
 	public static Vehicle getRandomVehicle() {
-		Vehicle vehicle = new Vehicle(1L,"Car",5);
+		Vehicle vehicle = new Vehicle((new Random()).nextLong(),RandomStringUtils.randomAlphanumeric(5),RandomStringUtils.randomAlphanumeric(20),(new Random()).nextInt(10000));
 		return vehicle;
 	}
 	public static Person getRandomPerson() {

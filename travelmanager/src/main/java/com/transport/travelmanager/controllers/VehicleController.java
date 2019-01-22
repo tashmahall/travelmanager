@@ -38,15 +38,15 @@ public class VehicleController {
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	@PostMapping(path="/getvehicle",consumes= {MediaType.APPLICATION_JSON_VALUE},produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<JsonNode>getDestinyByName(@RequestBody JsonNode request){
+	public ResponseEntity<JsonNode>getVehicleByVehicleCode(@RequestBody JsonNode request){
 		ObjectNode response = JackJsonUtils.createNewNode();
-		if(!request.has("name") || request.get("name").textValue().isEmpty()){
+		if(!request.has("vehicleCode") || request.get("vehicleCode").textValue().isEmpty()){
 			response.put("message","Wrong attributes sent");
-			response.put("name", "");
+			response.put("vehicleCode", "");
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
 		}
 		String name = request.get("name").textValue();
-		Vehicle vehicle = vehicleRepository.findByName(name);
+		Vehicle vehicle = vehicleRepository.findByVehicleCode(name);
 		response.set("Vehicle", JackJsonUtils.convertValue(vehicle));
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

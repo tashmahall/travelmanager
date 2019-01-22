@@ -18,6 +18,8 @@ public class TransportRepository {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private SeatRepository seatRepository;
+	@Autowired
+	private ITransportRepository repository;
 	
 	public Transport createNewTransport(Long destinyId,Long vehicleId,Integer capacity ,Date dateTimeTraveStart, String transportCode) {
 		Long nextId = jdbcTemplate.queryForObject("select transport_seq.nextval from dual",Long.class);

@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,6 +37,7 @@ public class Person {
 	private String name;
 	@Column(name="SOCIAL_ID",nullable=false, unique=true)
 	private String socialId;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", locale="pt-BR", timezone = "Brazil/East")
 	@Temporal(TemporalType.DATE)
 	@Column(name="BIRTH_DATE")
 	private Date birthDate;

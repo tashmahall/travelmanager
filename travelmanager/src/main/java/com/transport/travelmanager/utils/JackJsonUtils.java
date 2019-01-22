@@ -21,6 +21,8 @@ public class JackJsonUtils {
 	public static ObjectMapper init() {
 		ObjectMapper om = new ObjectMapper();
 		om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+//		om.setDateFormat(df);
 		return om;
 	}
 	public static void put(JsonNode node, String field, String value) {

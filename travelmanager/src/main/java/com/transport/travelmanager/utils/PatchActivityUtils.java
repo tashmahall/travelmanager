@@ -18,10 +18,10 @@ public class PatchActivityUtils {
 		entityJsonString = patchActivityString(patchSingleOperation, entityJsonString);
 		return JackJsonUtils.jsonStringToObject(entityJsonString, classType);
 	}
-	public static <T> T patchActivityEntity(JsonNode patchSingleOperation, T entity, Class<T> classType) throws IOException, TravelManagerException {
+	public static <T> void patchActivityEntity(JsonNode patchSingleOperation, T entity, Class<T> classType) throws IOException, TravelManagerException {
 		String entityJsonString = JackJsonUtils.entityToJsonString(entity);
 		entityJsonString = patchActivityString(patchSingleOperation, entityJsonString);
-		return  JackJsonUtils.jsonStringToObject(entityJsonString, classType);
+		entity= JackJsonUtils.jsonStringToObject(entityJsonString, classType);
 	}
 	public static String patchActivityString (JsonNode patchSingleOperation, String entity) throws TravelManagerException {
 		String patchOperation = patchSingleOperation.get("op").asText().toLowerCase() ;
